@@ -14,7 +14,12 @@ namespace WebBruteforce.Controllers
 		[HttpPost]
 		public ViewResult BruteforceResult(HashInput hashInput)
 		{
-			return View();
+			var output = new HashOutput()
+			{
+				Results = new List<string>() { "123: 456\n", "12345: 543\n", "32: 11\n" },
+				Errors = new List<string>() { "YOU ARE IDIOT"}
+			};
+			return View(output);
 		}
 
 	}

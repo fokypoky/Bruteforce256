@@ -1,0 +1,45 @@
+﻿@model HashOutput;
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Bruteforce result</title>
+	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css"/>
+	<link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+
+<h5 class="text-black-50 text-center m-2 p-2">BRUTEFORCE RESULT</h5>
+
+<div class="form-group results-block">
+	<label>Values</label>
+	<textarea class="form-control" rows="5">
+		@foreach (var hashOutput in Model.Results)
+		{
+			@hashOutput
+		}
+	</textarea>
+</div>
+
+<div class="form-group errors-block">
+	<label>Errors</label>
+	<textarea class="form-control" rows="3">
+		@foreach (var hashError in @Model.Errors)
+		{
+			@hashError
+		}
+	</textarea>
+</div>
+
+<div class="button-block text-center">
+	<button asp-action="Index" class="btn btn-primary">
+		Try again
+	</button>
+</div>
+
+</body>
+</html>
