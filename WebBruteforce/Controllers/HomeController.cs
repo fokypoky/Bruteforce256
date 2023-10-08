@@ -11,7 +11,8 @@ namespace WebBruteforce.Controllers
 			return View();
 		}
 
-		public ViewResult BruteforceResult()
+		[HttpPost]
+		public ViewResult BruteforceResult(HashInput hashInput)
 		{
 			return View();
 		}
