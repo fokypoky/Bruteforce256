@@ -16,6 +16,7 @@
 <h5 class="text-black-50 text-center m-2 p-2">INPUT SHA-256</h5>
 
 <form class="m-2" method="post" asp-action="BruteforceResult">
+	<div asp-validation-summary="All"></div>
 	<div class="form-group">
 		<label asp-for="Hashes">Input your hashes here</label>
 		<textarea class="form-control" rows="5" asp-for="Hashes"></textarea>
@@ -24,6 +25,11 @@
 	<div class="form-group">
 		<label asp-for="FilePath">Or input file path</label>
 		<input asp-for="FilePath" class="form-control"/>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="ThreadsCount">Threads count</label>
+		<input asp-for="ThreadsCount" type="number" min="1" max="100" class="form-control"/>
 	</div>
 
 	<div class="text-center button-block">

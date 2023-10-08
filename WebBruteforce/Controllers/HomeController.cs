@@ -6,7 +6,7 @@ namespace WebBruteforce.Controllers
 {
 	public class HomeController : Controller
 	{
-		public ViewResult Index()
+		public IActionResult Index()
 		{
 			return View();
 		}
