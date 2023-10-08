@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using BruteforceLib.Bruteforce.Implementation;
+using BruteforceLib.Hashers.Implementation;
 using WebBruteforce.Models;
 
 namespace WebBruteforce.Controllers
@@ -14,12 +15,47 @@ namespace WebBruteforce.Controllers
 		[HttpPost]
 		public ViewResult BruteforceResult(HashInput hashInput)
 		{
-			var output = new HashOutput()
+			var hashOutput = new HashOutput()
 			{
-				Results = new List<string>() { "123: 456\n", "12345: 543\n", "32: 11\n" },
-				Errors = new List<string>() { "YOU ARE IDIOT"}
+				Errors = new List<string>(),
+				Results = new List<string>()
 			};
-			return View(output);
+
+			if (hashInput.ThreadsCount is null)
+			{
+				hashOutput.Errors.Add("No threads count");
+				return View(hashOutput);
+			}
+
+			if (String.IsNullOrWhiteSpace(hashInput.Hashes) && String.IsNullOrWhiteSpace(hashInput.FilePath))
+			{
+				hashOutput.Errors.Add("No hashes specified\n");
+				return View(hashOutput);
+			}
+
+			var hashes = new List<string>();
+
+			if (!String.IsNullOrWhiteSpace(hashInput.FilePath))
+			{
+				// TODO: File reading
+			}
+			else
+			{
+				foreach (var hash in hashInput.Hashes.Split("\r\n"))
+				{
+					hashes.Add(hash.Replace(" ", ""));
+				}
+			}
+
+			var bruteforce = new Bruteforcer(hashes, new Sha256Hasher(), (int)hashInput.ThreadsCount);
+			bruteforce.Bruteforce();
+
+			foreach (var hash in bruteforce.Results)
+			{
+				hashOutput.Results.Add(hash + "\n");
+			}
+
+			return View(hashOutput);
 		}
 
 	}

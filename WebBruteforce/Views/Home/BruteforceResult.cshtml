@@ -18,9 +18,9 @@
 <div class="form-group results-block">
 	<label>Values</label>
 	<textarea class="form-control" rows="5">
-		@foreach (var hashOutput in Model.Results)
+		@foreach (string hashResult in Model.Results)
 		{
-			@hashOutput
+			@hashResult
 		}
 	</textarea>
 </div>
@@ -28,7 +28,7 @@
 <div class="form-group errors-block">
 	<label>Errors</label>
 	<textarea class="form-control" rows="3">
-		@foreach (var hashError in @Model.Errors)
+		@foreach (string hashError in @Model.Errors)
 		{
 			@hashError
 		}

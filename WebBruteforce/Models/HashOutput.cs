@@ -2,7 +2,7 @@
 {
 	public class HashOutput
 	{
-		public IEnumerable<string>? Results { get; set; }
-		public IEnumerable<string>? Errors { get; set; }
+		public List<string>? Results { get; set; }
+		public List<string>? Errors { get; set; }
 	}
 }
