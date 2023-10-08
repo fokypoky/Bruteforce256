@@ -1,8 +1,33 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Bruteforce SHA-256</title>
+	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css"/>
+	<link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+
+<h5 class="text-black-50 text-center m-2 p-2">INPUT SHA-256</h5>
+
+<form class="m-2" method="post" asp-action="BruteforceResult">
+	<div class="form-group">
+		<label>Input your hashes here</label>
+		<textarea class="form-control" rows="5"></textarea>
+	</div>
+
+	<div class="form-group">
+		<label>Or input file path</label>
+		<input class="form-control"/>
+	</div>
+
+	<div class="text-center button-block">
+		<button class="btn btn-primary">Bruteforce</button>
+	</div>
+</form>
+
+</body>
+</html>
