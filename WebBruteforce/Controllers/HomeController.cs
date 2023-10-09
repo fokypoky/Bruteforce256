@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BruteforceLib.Bruteforce.Implementation;
 using BruteforceLib.Hashers.Implementation;
+using WebBruteforce.Infrastructure.Repositories.Implementation;
 using WebBruteforce.Models;
+using System.IO;
 
 namespace WebBruteforce.Controllers
 {
@@ -37,7 +39,20 @@ namespace WebBruteforce.Controllers
 
 			if (!String.IsNullOrWhiteSpace(hashInput.FilePath))
 			{
-				// TODO: File reading
+				if (System.IO.File.Exists(hashInput.FilePath))
+				{
+					var repository = new TextFileRepository();
+					foreach (var hash in repository.ReadFile(hashInput.FilePath).Split("\n"))
+					{
+						hashes.Add(hash);
+					}
+				}
+				else
+				{
+					hashOutput.Errors.Add("File not exists");
+					return View(hashOutput);
+				}
+				
 			}
 			else
 			{
@@ -49,6 +64,11 @@ namespace WebBruteforce.Controllers
 
 			var bruteforce = new Bruteforcer(hashes, new Sha256Hasher(), (int)hashInput.ThreadsCount);
 			bruteforce.Bruteforce();
+
+			if (bruteforce.Results.Count == 0)
+			{
+				hashOutput.Results.Add("Not results");
+			}
 
 			foreach (var hash in bruteforce.Results)
 			{

@@ -86,12 +86,12 @@ namespace BruteforceLib.Bruteforce.Implementation
 			for (int i = forceObject.StartIndex; i <= forceObject.EndIndex; i++)
 			{
 				string currentWord = GetCombinationByPosition(i);
-
-				if (Hashes.Contains(Hasher.Hash(currentWord)))
+				string currentWordHash = Hasher.Hash(currentWord);
+				if (Hashes.Contains(currentWordHash))
 				{
 					lock (Results)
 					{
-						Results.Add(currentWord);
+						Results.Add($"{currentWordHash} = {currentWord}");
 					}
 				}
 			}
